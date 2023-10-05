@@ -4,11 +4,10 @@ from django.conf import settings
 from django.views.generic import RedirectView
 from django.conf.urls.static import static
 from rest_framework import routers
-from apps.menu.views import ProductViewSet, CartItemViewSet, CartViewSet
+from apps.menu.views import ProductViewSet, CartViewSet
 
 router = routers.DefaultRouter()
 router.register(r'products', ProductViewSet)
-router.register(r'cart/cart_item', CartItemViewSet)
 router.register(r'cart', CartViewSet)
 
 api_urlpatterns = [
