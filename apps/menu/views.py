@@ -1,7 +1,7 @@
 from rest_framework import viewsets, generics
-from apps.menu.models import Product, Cart
-from apps.menu.serializers import ProductSerializer,  CartSerializer
-from .serializers import send_order_email
+from apps.menu.models import Product, Cart, CartItem
+from apps.menu.serializers import ProductSerializer,CartItemSerializer,CartSerializer
+# from .serializers import send_order_email
 
 # Create your views here.
 class ProductViewSet(viewsets.ModelViewSet):
@@ -11,12 +11,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 class CartViewSet(viewsets.ModelViewSet):
     queryset = Cart.objects.all()
     serializer_class = CartSerializer
-    
-    def perform_create(self, serializer):
-        order = serializer.save()
-        send_order_email(order)
-        
-# class CreateCartItemView(generics.CreateAPIView):
-#     queryset = CartItem.objects.all()
-#     serializer_class = CartItemSerializer
-    
+
+class CartItemViewSet(viewsets.ModelViewSet):
+    queryset = CartItem.objects.all()
+    serializer_class = CartItemSerializer
