@@ -30,7 +30,13 @@ class Product(models.Model):
     name = models.CharField(verbose_name='Название блюдо',max_length=1555)
     price = models.DecimalField(verbose_name='Цена',max_digits=10, decimal_places=2)
     image = models.FileField(upload_to='menu_images/')
-    
+    category = models.ForeignKey(
+        Category,
+        related_name='products',
+        on_delete=models.CASCADE,
+        verbose_name='Категория продукта'
+    )
+
     def __str__(self):
         return f"{self.name} - {self.price}"
 
