@@ -4,7 +4,7 @@ from apps.menu.serializers import ProductSerializer,CartSerializer,CategorySeria
 # from .serializers import send_order_email
 
 # Create your views here.
-class CategoryViewSet(viewsets.ModelViewSet):
+class CategoryAPIView(generics.ListAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
@@ -12,6 +12,6 @@ class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     
-class CartAPIView(generics.ListAPIView):
+class CartViewSet(viewsets.ModelViewSet):
     queryset = Cart.objects.all()
     serializer_class = CartSerializer
