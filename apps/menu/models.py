@@ -1,4 +1,30 @@
 from django.db import models
+from slugify import slugify
+
+class Category(models.Model):
+    name = models.CharField(
+        max_length=55,
+        verbose_name='Название категории'
+    )
+    slug = models.SlugField(
+        unique=True,
+        auto_created=True,
+        blank=True,
+        null=True
+    )
+    def save(self, *args, **kwargs):
+        if self.slug:
+            self.slug = self.slug
+        else:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)  
+
+    def __str__(self):
+        return f"{self.name}"
+
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
 
 class Product(models.Model):
     name = models.CharField(verbose_name='Название блюдо',max_length=1555)
@@ -11,6 +37,7 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Меню"
         verbose_name_plural = "Меню"
+
 
 class Cart(models.Model):
     username = models.CharField(verbose_name='Имя',max_length=1555, unique=True)
